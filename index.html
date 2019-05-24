@@ -4,11 +4,11 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Canvas API</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/theme/sky.css">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
@@ -25,8 +25,179 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h2>Canvas</h2>
+				</section>
+				<section>
+					<h3>Canvas API</h3>
+					<p>The Canvas API provides a means for drawing graphics via JavaScript and the HTML element:</p>
+					<pre><code><canvas></canvas></code></pre>
+						<p>Among other things, it can be used for animation, game graphics, data visualization, photo manipulation,
+						and real-time video processing.</p>
+				</section>
+				<section>
+					<h3>Browsers support</h3>
+					<ul>
+						<li>Google Chrome</li>
+						<li>Firefox</li>
+						<li>Opera 9</li>
+						<li>Safari</li>
+						<li>from IE 9</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Tag</h3>
+					<pre><code><canvas width="300" height="150"></canvas></code></pre>
+					<ul>
+						<li>should have closing tag</li>
+						<li>height & width (there are default values)</li>
+					</ul>
+				</section>
+				<section>
+					<h3>The rendering context</h3>
+					<p>The canvas is initially blank. To display something, a script first needs to access
+						the rendering context and draw on it.</p>
+					<pre style="white-space: pre-wrap;"><code>function draw() {
+  const canvas = document.getElementById('tutorial');
+  const ctx = canvas.getContext('2d');
+}</code></pre>
+				</section>
+				<section>
+					<section>
+						<h2>Drawing</h2>
+					</section>
+					<section>
+						<h3>Shapes & Styles</h3>
+						<ul>
+							<li>rectangle</li>
+							<li>paths</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Rectangle</h3>
+						<pre style="white-space: pre-wrap;"><code>fillRect(x, y, width, height)   // Draws a filled rectangle
+								strokeRect(x, y, width, height) // Draws a rectangular outline
+								clearRect(x, y, width, height)  // Clears rectangular area</code></pre>
+					</section>
+					<section>
+						<h4>Drawing example</h4>
+						<pre><code>function draw() {
+  const canvas = document.getElementById('canvas');
+  if (canvas.getContext){
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillRect(25,25,100,100);
+  	ctx.clearRect(45,45,60,60);
+  	ctx.strokeRect(50,50,50,50);
+  }
+}</code></pre>
+						<img width="200px" height="200px" src="https://mdn.mozillademos.org/files/245/Canvas_rect.png" alt="squares" style="border: none;">
+					</section>
+					<section>
+						<h3>Path</h3>
+						<ul>
+							<li>First, you create the path.</li>
+							<pre><code>beginPath()</code></pre>
+							<li>Then you use drawing commands to draw into the path.</li>
+							<pre><code>Path methods; closePath()</code></pre>
+							<li>Once the path has been created, you can stroke or fill the path to render it.</li>
+							<pre><code>stroke(); fill()</code></pre>
+						</ul>
+					</section>
+					<section>
+						<h4>Drawing paths example</h4>
+						<pre><code>function draw() {
+  const canvas = document.getElementById('canvas');
+  if (canvas.getContext){
+    const ctx = canvas.getContext('2d');
+
+    ctx.beginPath();
+    ctx.moveTo(75,50);
+    ctx.lineTo(100,75);
+    ctx.lineTo(100,25);
+    ctx.fill();
+  }
+}</code></pre>
+						<img width="200px" height="200px" src="https://mdn.mozillademos.org/files/9847/triangle.png" alt="triangle" style="border: none;">
+					</section>
+					<section>
+						<h3>Style colors</h3>
+						<p>Up until now we have only seen methods of the drawing context.
+							If we want to apply colors to a shape, there are two important properties
+							we can use: <strong>fillStyle</strong> and <strong>strokeStyle</strong>.</p>
+						<pre style="white-space: pre-wrap;"><code>// these all set the fillStyle to 'orange'
+							ctx.fillStyle = "orange";
+							ctx.fillStyle = "#FFA500";
+							ctx.fillStyle = "rgb(255,165,0)";
+							ctx.fillStyle = "rgba(255,165,0,1)";
+							</code></pre>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Animation</h2>
+					</section>
+					<section>
+						<h3>Saving and restoring state</h3>
+						<p>Two methods which are indispensable once you start generating ever more complex drawings.</p>
+						<pre ><code>save(); restore();</code></pre>
+					</section>
+					<section>
+						<h3>Basic animation steps</h3>
+							<ul>
+							<li>Clear the canvas</li>
+							<li>Save the canvas state</li>
+							<li>Draw animated shapes</li>
+							<li>Restore the canvas state</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Controlling an animation</h3>
+						<h6>Scheduled updates</h6>
+						<pre style="white-space: pre-wrap;"><code>setInterval(function, delay)    // no user interaction
+							setTimeout(function, delay)     // use keyboard or mouse events
+							requestAnimationFrame(callback) // user interaction</code></pre>
+					</section>
+					<section>
+						<h4>Animation code example</h4>
+						<pre style="white-space: pre-wrap;"><code>function draw() {
+  var ctx = document.getElementById('canvas').getContext('2d');
+  ctx.globalCompositeOperation = 'destination-over';
+  ctx.clearRect(0,0,300,300); // clear canvas
+
+  ctx.fillStyle = 'rgba(0,0,0,0.4)';
+  ctx.strokeStyle = 'rgba(0,153,255,0.4)';
+  ctx.save(); // save state
+
+  // Draw smth
+  ctx.rotate( ((2*Math.PI)/60)*time.getSeconds() + ((2*Math.PI)/60000)*time.getMilliseconds() );
+  ctx.translate(105,0);
+  ctx.fillRect(0,-12,50,24);
+  ctx.drawImage(earth,-12,-12);
+	......
+  ctx.restore(); // restore state
+
+  window.requestAnimationFrame(draw);
+}</code></pre>
+					</section>
+				</section>
+				<section>
+					<h3>Librires</h3>
+					<p>The Canvas API is extremely powerful, but not always simple to use.
+						The libraries listed below can make the creation of canvas-based projects faster and easier.
+					</p>
+					<ul>
+						<li><a href="#">EaselJS </a></li>
+						<li><a href="#">Fabric.js</a></li>
+						<li><a href="#">heatmap.js </a></li>
+						<li><a href="#">Konva.js</a></li>
+						<li><a href="#">5.js</a></li>
+						<li>...</li>
+					</ul>
+				</section>
+				<section>
+					<a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/">https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/</a>
+				</section>
 			</div>
 		</div>
 
