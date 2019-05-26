@@ -27,6 +27,7 @@
 			<div class="slides">
 				<section>
 					<h2>Canvas</h2>
+          <aside class="notes">Canvas</aside>
 				</section>
 				<section>
 					<h3>Canvas API</h3>
@@ -34,6 +35,9 @@
 					<pre><code><canvas></canvas></code></pre>
 						<p>Among other things, it can be used for animation, game graphics, data visualization, photo manipulation,
 						and real-time video processing.</p>
+          <aside class="notes">
+            The Canvas API provides a means for drawing graphics via JavaScript and the HTML element canvas.
+          </aside>
 				</section>
 				<section>
 					<h3>Browsers support</h3>
@@ -44,6 +48,7 @@
 						<li>Safari</li>
 						<li>from IE 9</li>
 					</ul>
+          <aside class="notes">Browsers support</aside>
 				</section>
 				<section>
 					<h3>Tag</h3>
@@ -52,6 +57,7 @@
 						<li>should have closing tag</li>
 						<li>height & width (there are default values)</li>
 					</ul>
+          <aside class="notes">canvas tag attributes</aside>
 				</section>
 				<section>
 					<h3>The rendering context</h3>
@@ -61,10 +67,12 @@
   const canvas = document.getElementById('tutorial');
   const ctx = canvas.getContext('2d');
 }</code></pre>
+          <aside class="notes">The rendering context</aside>
 				</section>
 				<section>
 					<section>
 						<h2>Drawing</h2>
+            <aside class="notes">Drawing</aside>
 					</section>
 					<section>
 						<h3>Shapes & Styles</h3>
@@ -72,12 +80,14 @@
 							<li>rectangle</li>
 							<li>paths</li>
 						</ul>
+            <aside class="notes">Shapes & Styles</aside>
 					</section>
 					<section>
 						<h3>Rectangle</h3>
 						<pre style="white-space: pre-wrap;"><code>fillRect(x, y, width, height)   // Draws a filled rectangle
 								strokeRect(x, y, width, height) // Draws a rectangular outline
 								clearRect(x, y, width, height)  // Clears rectangular area</code></pre>
+            <aside class="notes">Rectangle</aside>
 					</section>
 					<section>
 						<h4>Drawing example</h4>
@@ -92,7 +102,8 @@
   }
 }</code></pre>
 						<img width="200px" height="200px" src="https://mdn.mozillademos.org/files/245/Canvas_rect.png" alt="squares" style="border: none;">
-					</section>
+            <aside class="notes">Rectangle drawing example</aside>
+          </section>
 					<section>
 						<h3>Path</h3>
 						<ul>
@@ -103,6 +114,7 @@
 							<li>Once the path has been created, you can stroke or fill the path to render it.</li>
 							<pre><code>stroke(); fill()</code></pre>
 						</ul>
+            <aside class="notes">Steps to dtaw a path.</aside>
 					</section>
 					<section>
 						<h4>Drawing paths example</h4>
@@ -119,7 +131,8 @@
   }
 }</code></pre>
 						<img width="200px" height="200px" src="https://mdn.mozillademos.org/files/9847/triangle.png" alt="triangle" style="border: none;">
-					</section>
+            <aside class="notes">Drawing paths example</aside>
+          </section>
 					<section>
 						<h3>Style colors</h3>
 						<p> If we want to apply colors to a shape, there are two important properties
@@ -130,16 +143,19 @@
 							ctx.fillStyle = "rgb(255,165,0)";
 							ctx.fillStyle = "rgba(255,165,0,1)";
 							</code></pre>
+            <aside class="notes">Style colors</aside>
 					</section>
 				</section>
 				<section>
 					<section>
 						<h2>Animation</h2>
+            <aside class="notes">Animation</aside>
 					</section>
 					<section>
 						<h3>Saving and restoring state</h3>
 						<p>Two methods which are indispensable once you start generating ever more complex drawings.</p>
 						<pre ><code>save(); restore();</code></pre>
+            <aside class="notes">Saving and restoring state</aside>
 					</section>
 					<section>
 						<h3>Basic animation steps</h3>
@@ -149,6 +165,7 @@
 							<li>Draw animated shapes</li>
 							<li>Restore the canvas state</li>
 						</ul>
+            <aside class="notes">4 basic animation steps</aside>
 					</section>
 					<section>
 						<h3>Controlling an animation</h3>
@@ -156,6 +173,7 @@
 						<pre style="white-space: pre-wrap;"><code>setInterval(function, delay)    // no user interaction
 							setTimeout(function, delay)     // use keyboard or mouse events
 							requestAnimationFrame(callback) // user interaction</code></pre>
+            <aside class="notes">Controlling an animation</aside>
 					</section>
 					<section>
 						<h4>Animation code example</h4>
@@ -178,6 +196,7 @@
 
   window.requestAnimationFrame(draw);
 }</code></pre>
+            <aside class="notes">Animation code example</aside>
 					</section>
 				</section>
 				<section>
@@ -193,10 +212,12 @@
 						<li><a href="#">5.js</a></li>
 						<li>...</li>
 					</ul>
+          <aside class="notes">Librires</aside>
 				</section>
 				<section>
 					<a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/">https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/</a>
-				</section>
+          <aside class="notes">More on developer.mozilla.org</aside>
+        </section>
 			</div>
 		</div>
 
